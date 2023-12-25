@@ -11,10 +11,16 @@ private:
 	sf::CircleShape player;
 
 	// User moving.
-	bool isMovingUp;
-	bool isMovingDown;
-	bool isMovingLeft;
-	bool isMovingRight;
+	bool isMovingUp    = false;
+	bool isMovingDown  = false;
+	bool isMovingLeft  = false;
+	bool isMovingRight = false;
+
+	// Define how much time one frame will occure.
+	const sf::Time TIME_PER_FRAME = sf::seconds(1.f / 60.f);
+
+	// Player's speed.
+	const float playerSpeed = 100.f;
 
 public:
 	Game();
@@ -40,9 +46,11 @@ private:
 	// 
 	//		This one updates the state for the player shape or 
 	//		another shapes that will be shown on the screen.
+	//		delta is the parameter that defines the time of each
+	//		frame in our computer.
 	// 
 	////////////////////////////////////////////////////////////////////
-	void Update();
+	void Update(sf::Time delta);
 
 	////////////////////////////////////////////////////////////////////
 	// 

@@ -15,11 +15,33 @@ Game::Game()
 
 void Game::Run()
 {
+	sf::Clock clock;
+	sf::Time lastUpdateTime = sf::Time::Zero; // Last update.
+
 	// A main or a game loop.
 	while (window.isOpen())
 	{
 		ProcessEvent();
-		Update();
+
+		lastUpdateTime += clock.restart(); // Get the delta time.
+
+		// Here we look if our time is more than setted time for
+		// each frame, if it is true we need to update the user
+		// screen. This way is most common in game developing, 
+		// because it give the update method a consatnt value of
+		// delta time, that means we haven't any problems with 
+		// the problem of huge differece between two values.
+		while (lastUpdateTime > TIME_PER_FRAME)
+		{
+			lastUpdateTime -= TIME_PER_FRAME; // We substract the constant time in each iteration.
+			ProcessEvent();
+			Update(TIME_PER_FRAME);
+		}
+
+		// Fast computers will skip the above loop
+		// and call the Render() a lot, but opposite
+		// when the computer is slow the Render() will
+		// be called fewer times.
 		Render();
 	}
 }
@@ -46,7 +68,7 @@ void Game::ProcessEvent()
 	}
 }
 
-void Game::Update()
+void Game::Update(sf::Time delta)
 {
 	sf::Vector2f movement(0.f, 0.f);
 
@@ -70,7 +92,10 @@ void Game::Update()
 		movement.x += 1;
 	}
 
-	player.move(movement); // Move the player shape to the right position.
+	// With multiplaying movement vector by delta we firstly
+	// make user's moving more smoothest and finaly, we remove
+	// dependence for frame. 
+	player.move(movement * playerSpeed * delta.asSeconds()); // Move the player shape to the right position.
 }
 
 void Game::Render()
