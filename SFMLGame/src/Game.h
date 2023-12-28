@@ -1,14 +1,19 @@
 #pragma once
 
 #include <SFML/Graphics/RenderWindow.hpp>
-#include <SFML/Graphics/CircleShape.hpp>
+#include <SFML/Graphics/Sprite.hpp>
+#include <SFML/Graphics/Texture.hpp>
 #include <SFML/Window/Keyboard.hpp>
+
+
+#include "Holders/Holders.h"
+
 
 class Game
 {
 private:
 	sf::RenderWindow window;
-	sf::CircleShape player;
+	sf::Sprite player;
 
 	// User moving.
 	bool isMovingUp    = false;
@@ -21,6 +26,9 @@ private:
 
 	// Player's speed.
 	const float playerSpeed = 100.f;
+
+	// Holders.
+	TextureHolder textures;
 
 public:
 	Game();

@@ -131,10 +131,22 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Enums\FontID.h" />
+    <ClInclude Include="src\Enums\MusicID.h" />
+    <ClInclude Include="src\Enums\ShaderID.h" />
+    <ClInclude Include="src\Enums\SoundID.h" />
+    <ClInclude Include="src\Enums\TextureID.h" />
     <ClInclude Include="src\Game.h" />
+    <ClInclude Include="src\Holders\Holders.h" />
+    <ClInclude Include="src\Holders\ResourceHolder.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="data\img\Sprite-0001.aseprite" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="data\img\Eagle.gif" />
+    <Image Include="data\img\Eagle.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

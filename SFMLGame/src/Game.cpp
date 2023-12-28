@@ -6,11 +6,15 @@
 Game::Game()
 	: window(sf::VideoMode(640, 480), "First SFML Game")
 	, player()
+	, textures()
 {
-	player.setRadius(40.f);
-	player.setOrigin(20, 20); // Set the point of the player shape will be moving.
+	textures.Load(Textures::TextureID::Airplane, "data/img/Eagle.png");
+
+	player.setTexture(textures.Get(Textures::TextureID::Airplane));
+	//player.setScale(4.f, 4.f);
+	// Set the point of the player shape will be moving.
+	//player.setOrigin(texture.getSize().x * 0.5f / 2.f, texture.getSize().y * 0.5f / 2.f); 
 	player.setPosition(window.getSize().x / 2.f, window.getSize().y / 2.f);
-	player.setFillColor(sf::Color::Cyan);
 }
 
 void Game::Run()
