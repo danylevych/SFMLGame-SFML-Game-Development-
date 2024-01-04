@@ -6,7 +6,7 @@
 
 
 //////////////////////////////////////////////////
-// 
+// \brief
 //	  This class is like lightweight pettern
 //	  for the project.
 // 
@@ -26,7 +26,7 @@ public:
 
 public:
 	///////////////////////////////////////////////////////////
-	// 
+	// \brief
 	//		This method loads the resource from file 
 	//		into resourceMap.
 	// 
@@ -34,7 +34,7 @@ public:
 	void Load(const ID id, const std::string& path);
 
 	//////////////////////////////////////////////////////////
-	// 
+	// \brief
 	//		This is an overloaded Load method for 
 	//		another classes, which do not have the
 	//		loadFromFile method that takes one param.
@@ -45,7 +45,7 @@ public:
 	void Load(const ID id, const std::string& path, const Parameter& secondPar);
 
 	///////////////////////////////////////////////////////////
-	// 
+	// \brief
 	//		These both return the requested resource.
 	// 
 	///////////////////////////////////////////////////////////

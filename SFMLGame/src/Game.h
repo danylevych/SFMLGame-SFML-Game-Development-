@@ -1,19 +1,25 @@
 #pragma once
 
+
+#include "Scene/World/World.h"
+
+
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Window/Keyboard.hpp>
 
 
-#include "Holders/Holders.h"
-
-
+///////////////////////////////////////////////
+// \brief
+//		The class represents the game obj.
+// 
+///////////////////////////////////////////////
 class Game
 {
 private:
 	sf::RenderWindow window;
-	sf::Sprite player;
+	World			 world;
 
 	// User moving.
 	bool isMovingUp    = false;
@@ -27,15 +33,12 @@ private:
 	// Player's speed.
 	const float playerSpeed = 100.f;
 
-	// Holders.
-	TextureHolder textures;
-
 public:
 	Game();
 
 public:
 	////////////////////////////////////////////////////////////////////
-	// 
+	// \brief
 	//		This method starts a game, it is better to say
 	//		run a game loop.
 	// 
@@ -44,14 +47,14 @@ public:
 
 private:
 	////////////////////////////////////////////////////////////////////
-	// 
+	// \brief
 	//			This method handels the user input.
 	// 
 	////////////////////////////////////////////////////////////////////
 	void ProcessEvent();
 
 	////////////////////////////////////////////////////////////////////
-	// 
+	// \brief
 	//		This one updates the state for the player shape or 
 	//		another shapes that will be shown on the screen.
 	//		delta is the parameter that defines the time of each
@@ -61,14 +64,14 @@ private:
 	void Update(sf::Time delta);
 
 	////////////////////////////////////////////////////////////////////
-	// 
+	// \brief
 	//		This method displaes all objects in user screen. 
 	// 
 	////////////////////////////////////////////////////////////////////
 	void Render();
 
 	////////////////////////////////////////////////////////////////////
-	// 
+	// \brief
 	//		This method handles the user input such as: moving
 	//		or shooting ect.
 	// 

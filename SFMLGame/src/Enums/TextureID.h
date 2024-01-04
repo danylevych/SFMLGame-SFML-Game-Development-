@@ -4,8 +4,8 @@ namespace Textures
 {
 	enum class TextureID
 	{
-		Airplane,
-		Landscape,
-		Missile
+		Eagle,
+		Raptor,
+		Desert
 	};
 }

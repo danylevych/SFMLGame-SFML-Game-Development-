@@ -127,10 +127,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Scene\SpriteNode\SpriteNode.cpp" />
+    <ClCompile Include="src\Scene\SceneNode\SceneNode.cpp" />
+    <ClCompile Include="src\Entities\Aircraft\Aircraft.cpp" />
+    <ClCompile Include="src\Entities\Entity\Entity.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\Scene\World\World.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Scene\SpriteNode\SpriteNode.h" />
+    <ClInclude Include="src\Enums\Layer.h" />
+    <ClInclude Include="src\Scene\SceneNode\SceneNode.h" />
+    <ClInclude Include="src\Entities\Aircraft\Aircraft.h" />
+    <ClInclude Include="src\Entities\Entity\Entity.h" />
     <ClInclude Include="src\Enums\FontID.h" />
     <ClInclude Include="src\Enums\MusicID.h" />
     <ClInclude Include="src\Enums\ShaderID.h" />
@@ -139,14 +149,21 @@
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\Holders\Holders.h" />
     <ClInclude Include="src\Holders\ResourceHolder.h" />
+    <ClInclude Include="src\Scene\World\World.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="data\img\Sprite-0001.aseprite" />
+    <None Include="data\Img\Sprite-0001.aseprite" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="data\img\Eagle.gif" />
-    <Image Include="data\img\Eagle.png" />
+    <Image Include="data\Img\Eagle.gif" />
+    <Image Include="data\Img\Eagle.png" />
+    <Image Include="data\Textures\Desert.png" />
+    <Image Include="data\Textures\Eagle.png" />
+    <Image Include="data\Textures\Raptor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="data\Fonts\Sansation.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

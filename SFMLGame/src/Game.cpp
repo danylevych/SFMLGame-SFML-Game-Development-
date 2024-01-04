@@ -4,17 +4,10 @@
 
 
 Game::Game()
-	: window(sf::VideoMode(640, 480), "First SFML Game")
-	, player()
-	, textures()
+	: window(sf::VideoMode(640, 480), "World", sf::Style::Close)
+	, world(window)
 {
-	textures.Load(Textures::TextureID::Airplane, "data/img/Eagle.png");
-
-	player.setTexture(textures.Get(Textures::TextureID::Airplane));
-	//player.setScale(4.f, 4.f);
-	// Set the point of the player shape will be moving.
-	//player.setOrigin(texture.getSize().x * 0.5f / 2.f, texture.getSize().y * 0.5f / 2.f); 
-	player.setPosition(window.getSize().x / 2.f, window.getSize().y / 2.f);
+	// TODO: Create the text.
 }
 
 void Game::Run()
@@ -74,60 +67,17 @@ void Game::ProcessEvent()
 
 void Game::Update(sf::Time delta)
 {
-	sf::Vector2f movement(0.f, 0.f);
-
-	if (isMovingUp)
-	{
-		movement.y -= 1;
-	}
-
-	if (isMovingDown)
-	{
-		movement.y += 1;
-	}
-
-	if (isMovingLeft)
-	{
-		movement.x -= 1;
-	}
-
-	if (isMovingRight)
-	{
-		movement.x += 1;
-	}
-
-	// With multiplaying movement vector by delta we firstly
-	// make user's moving more smoothest and finaly, we remove
-	// dependence for frame. 
-	player.move(movement * playerSpeed * delta.asSeconds()); // Move the player shape to the right position.
+	world.Update(delta);
 }
 
 void Game::Render()
 {
 	window.clear(sf::Color::Black); // We need to clear window for the first time.
-	window.draw(player);
+	world.Draw();
 	window.display();
 }
 
 void Game::HandlePlayerInput(sf::Keyboard::Key key, bool isPressed)
 {
-	switch (key)
-	{
-	case sf::Keyboard::W:
-		isMovingUp = isPressed;
-		break;
-
-	case sf::Keyboard::S:
-		isMovingDown = isPressed;
-		break;
-
-	case sf::Keyboard::A:
-		isMovingLeft = isPressed;
-		break;
-
-	case sf::Keyboard::D:
-		isMovingRight = isPressed;
-		break;
-	}
-
+	// TODO: Make a new input system.
 }

@@ -21,6 +21,21 @@
     <ClCompile Include="src\Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Entities\Entity\Entity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Entities\Aircraft\Aircraft.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scene\SceneNode\SceneNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scene\SpriteNode\SpriteNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scene\World\World.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Game.h">
@@ -47,17 +62,47 @@
     <ClInclude Include="src\Enums\SoundID.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Entities\Entity\Entity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Entities\Aircraft\Aircraft.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scene\SceneNode\SceneNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Enums\Layer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scene\SpriteNode\SpriteNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scene\World\World.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="data\img\Sprite-0001.aseprite" />
+    <None Include="data\Img\Sprite-0001.aseprite" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="data\img\Eagle.gif">
+    <Image Include="data\Img\Eagle.gif">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="data\img\Eagle.png">
+    <Image Include="data\Img\Eagle.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="data\Textures\Desert.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\Textures\Eagle.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\Textures\Raptor.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="data\Fonts\Sansation.ttf" />
   </ItemGroup>
 </Project>
