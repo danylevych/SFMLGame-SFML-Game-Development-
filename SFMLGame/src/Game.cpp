@@ -1,11 +1,14 @@
 #include "Game.h"
 
+#include <iostream>
 #include <SFML/Window/Event.hpp>
+
 
 
 Game::Game()
 	: window(sf::VideoMode(640, 480), "World", sf::Style::Close)
 	, world(window)
+	, player()
 {
 	// TODO: Create the text.
 }
@@ -32,6 +35,7 @@ void Game::Run()
 		{
 			lastUpdateTime -= TIME_PER_FRAME; // We substract the constant time in each iteration.
 			ProcessEvent();
+
 			Update(TIME_PER_FRAME);
 		}
 
@@ -48,25 +52,18 @@ void Game::ProcessEvent()
 	sf::Event event;
 	while (window.pollEvent(event))
 	{
-		switch (event.type)
+		player.HandleEvent(event, world.GetCommandQueue());
+		if (event.type == sf::Event::Closed)
 		{
-		case sf::Event::KeyPressed:
-			HandlePlayerInput(event.key.code, true);
-			break;
-
-		case sf::Event::KeyReleased:
-			HandlePlayerInput(event.key.code, false);
-			break;
-
-		case sf::Event::Closed:
 			window.close();
-			break;
 		}
 	}
+	
+	player.HandleRealTimeInput(world.GetCommandQueue());
 }
 
 void Game::Update(sf::Time delta)
-{
+{	
 	world.Update(delta);
 }
 
@@ -75,9 +72,4 @@ void Game::Render()
 	window.clear(sf::Color::Black); // We need to clear window for the first time.
 	world.Draw();
 	window.display();
-}
-
-void Game::HandlePlayerInput(sf::Keyboard::Key key, bool isPressed)
-{
-	// TODO: Make a new input system.
 }

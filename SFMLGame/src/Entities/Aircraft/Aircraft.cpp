@@ -1,5 +1,8 @@
 #include "Aircraft.h"
 
+#include "../../Enums/Category.h"
+
+
 Aircraft::Aircraft(Type type, TextureHolder& textures)
 	: type(type)
 	, sprite(textures.Get(ToTextureID(type)))
@@ -15,6 +18,18 @@ Aircraft::Aircraft(Type type, TextureHolder& textures)
 void Aircraft::DrawCurrent(sf::RenderTarget & target, sf::RenderStates states) const
 {
 	target.draw(sprite, states);
+}
+
+uint32_t Aircraft::GetCategory() const
+{
+	switch (type)
+	{
+	case Aircraft::Type::Ealge:
+		return Category::PlayerAircraft;
+	
+	default:
+		return Category::EnemyAircraft;
+	}
 }
 
 

@@ -3,6 +3,8 @@
 #include <algorithm>
 #include <cassert>
 
+#include "../../Enums/Category.h"
+
 
 void SceneNode::AttachChild(Ptr child)
 {
@@ -59,6 +61,24 @@ sf::Transform SceneNode::GetWorldTransform() const
 sf::Vector2f SceneNode::GetWorlPosition() const
 {
 	return GetWorldTransform() * sf::Vector2f();
+}
+
+uint32_t SceneNode::GetCategory() const
+{
+	return Category::Scene;
+}
+
+void SceneNode::OnCommand(const Command& command, sf::Time deltaTime)
+{
+	if (command.category & GetCategory()) // Our node is in the query.
+	{
+		command.action(*this, deltaTime);
+	}
+
+	for (auto& child : children) // Apply the command for each child.
+	{
+		child->OnCommand(command, deltaTime);
+	}
 }
 
 void SceneNode::UpdateChildren(sf::Time delta)

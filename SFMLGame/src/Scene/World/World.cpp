@@ -1,5 +1,6 @@
 #include "World.h"
 
+
 #include "../SpriteNode/SpriteNode.h"
 
 
@@ -24,24 +25,30 @@ World::World(sf::RenderWindow& window)
 void World::Update(sf::Time delta)
 {
 	view.move(0.f, scrollSpeed * delta.asSeconds());
+	playerAircraft->SetVelocity(0.f, 0.f);
 
-	sf::Vector2f position = playerAircraft->getPosition();
-	sf::Vector2f velocity = playerAircraft->GetVelocity();
-
-	if (position.x <= worldBounds.left + 150 ||
-		position.x >= worldBounds.left + worldBounds.width - 150)
+	// Forward commands to the scene graph.
+	while (!commandQueue.IsEmpty())
 	{
-		velocity.x = -velocity.x;
-		playerAircraft->SetVelocity(velocity);
+		sceneGraph.OnCommand(commandQueue.Pop(), delta);
 	}
 
+	AdaptPlayerVelocity();
+	
+
 	sceneGraph.Update(delta);
+	AdaptPlayerPosition();
 }
 
 void World::Draw()
 {
 	window.setView(view);
 	window.draw(sceneGraph);
+}
+
+CommandQueue& World::GetCommandQueue()
+{
+	return commandQueue;
 }
 
 void World::LoadTextures()
@@ -87,4 +94,42 @@ void World::BuildScene()
 
 	playerAircraft->AttachChild(std::move(leftEscort));
 	playerAircraft->AttachChild(std::move(rightEscort));
+}
+
+void World::AdaptPlayerVelocity()
+{
+	sf::Vector2f velocity = playerAircraft->GetVelocity();
+
+	if (velocity.x != 0.f && velocity.y != 0.f) // Player is moving on a diagonal.
+	{
+		// Normalizing the diagonaly velocity of the player.
+		playerAircraft->SetVelocity(velocity / std::sqrt(2.f));
+	}
+
+	// Add scroling velocity.
+	playerAircraft->Accelerate(0.f, scrollSpeed);
+}
+
+void World::AdaptPlayerPosition()
+{
+	// Define the rectangle where our player can be.
+	sf::FloatRect viewBounds(view.getCenter() - view.getSize() / 2.f, view.getSize());
+	const float DISTANCE_TO_BORDER = 45.f;
+	
+	// Don't allow player left the screen.
+	sf::Vector2f playerPos = playerAircraft->getPosition();
+	
+	// Set the right point.
+	playerPos.x = std::min<float>(playerPos.x, viewBounds.left + viewBounds.width - DISTANCE_TO_BORDER);
+	
+	// Set the left point.
+	playerPos.x = std::max<float>(playerPos.x, viewBounds.left + DISTANCE_TO_BORDER);
+
+	// Set the top point.
+	playerPos.y = std::max<float>(playerPos.y, viewBounds.top + DISTANCE_TO_BORDER);
+
+	// Set the bottom point.
+	playerPos.y = std::min<float>(playerPos.y, viewBounds.top + viewBounds.height - DISTANCE_TO_BORDER);
+
+	playerAircraft->setPosition(playerPos);
 }

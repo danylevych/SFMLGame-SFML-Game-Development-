@@ -2,7 +2,7 @@
 
 
 #include "Scene/World/World.h"
-
+#include "Inputs/Player/Player.h"
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Sprite.hpp>
@@ -20,12 +20,7 @@ class Game
 private:
 	sf::RenderWindow window;
 	World			 world;
-
-	// User moving.
-	bool isMovingUp    = false;
-	bool isMovingDown  = false;
-	bool isMovingLeft  = false;
-	bool isMovingRight = false;
+	Player			 player;
 
 	// Define how much time one frame will occure.
 	const sf::Time TIME_PER_FRAME = sf::seconds(1.f / 60.f);
@@ -69,13 +64,5 @@ private:
 	// 
 	////////////////////////////////////////////////////////////////////
 	void Render();
-
-	////////////////////////////////////////////////////////////////////
-	// \brief
-	//		This method handles the user input such as: moving
-	//		or shooting ect.
-	// 
-	////////////////////////////////////////////////////////////////////
-	void HandlePlayerInput(sf::Keyboard::Key key, bool isPressed);
 };
 

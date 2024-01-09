@@ -40,6 +40,14 @@ public:
 	void SetVelocity(float x, float y);
 	void SetVelocity(sf::Vector2f velocity);
 
+	///////////////////////////////////////////////////////
+	// \brief
+	//		      Acceleration the entity.
+	// 
+	///////////////////////////////////////////////////////
+	void Accelerate(sf::Vector2f velocity);
+	void Accelerate(float xVelocity, float yVelocity);
+
 private:
 	///////////////////////////////////////////////////////
 	// \brief

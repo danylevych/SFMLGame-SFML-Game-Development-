@@ -1,5 +1,8 @@
 #pragma once
 
+
+#include "../../Inputs/Command/Command.h"
+
 #include <memory>
 #include <vector>
 #include <SFML/System/NonCopyable.hpp>
@@ -9,6 +12,7 @@
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/System/Time.hpp>
 
+struct Command;
 
 ///////////////////////////////////////////////////
 // \brief
@@ -88,6 +92,21 @@ public:
 	// 
 	/////////////////////////////////////////////////////
 	sf::Vector2f GetWorlPosition() const;
+
+	/////////////////////////////////////////////////////
+	// \brief
+	//		Return the category for the instance
+	//		of the SceneNode.
+	// 
+	/////////////////////////////////////////////////////
+	virtual uint32_t GetCategory() const;
+
+	/////////////////////////////////////////////////////
+	// \brief
+	//		Execute the command for the scene node.
+	// 
+	/////////////////////////////////////////////////////
+	void OnCommand(const Command& command, sf::Time deltaTime);
 
 private:
 	/////////////////////////////////////////////////////

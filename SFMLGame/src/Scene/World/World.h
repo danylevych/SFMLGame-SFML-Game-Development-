@@ -3,6 +3,7 @@
 #include "../SceneNode/SceneNode.h"
 #include "../../Holders/Holders.h"
 #include "../../Entities/Aircraft/Aircraft.h"
+#include "../../Inputs/CommandQueue/CommandQueue.h"
 
 #include<SFML/Graphics/RenderWindow.hpp>
 #include <SFML/System/NonCopyable.hpp>
@@ -32,10 +33,12 @@ private:
 	sf::View		  view;
 	TextureHolder	  textures;
 	SceneNode		  sceneGraph;
+	sf::FloatRect	  worldBounds;
 
 	std::array<SceneNode*, Layer::LayerCount> sceneLayers;
 
-	sf::FloatRect	  worldBounds;
+	// ===========   Input    ==========
+	CommandQueue	  commandQueue;
 
 	// =========== User props ==========
 	sf::Vector2f	  spawnPos;
@@ -66,6 +69,13 @@ public:
 	/////////////////////////////////////////////////
 	void Draw();
 
+	/////////////////////////////////////////////////
+	// \brief
+	//		Returns the queue of the commands.
+	// 
+	/////////////////////////////////////////////////
+	CommandQueue& GetCommandQueue();
+
 private:
 	/////////////////////////////////////////////////
 	// \brief
@@ -80,5 +90,20 @@ private:
 	// 
 	/////////////////////////////////////////////////
 	void BuildScene();
+
+	/////////////////////////////////////////////////
+	// \breif
+	//		   Adapts the player velocity.
+	// 
+	/////////////////////////////////////////////////
+	void AdaptPlayerVelocity();
+
+	/////////////////////////////////////////////////
+	// \brief
+	//		Adapts the player position on
+	//		the visiable part of the game.
+	// 
+	/////////////////////////////////////////////////
+	void AdaptPlayerPosition();
 };
 
