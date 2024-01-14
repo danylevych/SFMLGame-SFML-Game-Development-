@@ -127,17 +127,32 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\GameStates\LoadingState\LoadingState.cpp" />
+    <ClCompile Include="src\Tools\ParalelTask\ParalelTask.cpp" />
+    <ClCompile Include="src\GameStates\PauseState\PauseState.cpp" />
+    <ClCompile Include="src\GameStates\MenuState\MenuState.cpp" />
+    <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\Inputs\CommandQueue\CommandQueue.cpp" />
     <ClCompile Include="src\Inputs\Player\Player.cpp" />
     <ClCompile Include="src\Scene\SpriteNode\SpriteNode.cpp" />
     <ClCompile Include="src\Scene\SceneNode\SceneNode.cpp" />
     <ClCompile Include="src\Entities\Aircraft\Aircraft.cpp" />
     <ClCompile Include="src\Entities\Entity\Entity.cpp" />
-    <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\GameStates\GameState\GameState.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\Scene\World\World.cpp" />
+    <ClCompile Include="src\GameStates\State\State.cpp" />
+    <ClCompile Include="src\GameStates\StateStack\StateStack.cpp" />
+    <ClCompile Include="src\GameStates\TitleState\TitleState.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\GameStates\LoadingState\LoadingState.h" />
+    <ClInclude Include="src\GameStates\States.h" />
+    <ClInclude Include="src\Tools\ParalelTask\ParalelTask.h" />
+    <ClInclude Include="src\GameStates\PauseState\PauseState.h" />
+    <ClInclude Include="src\GameStates\MenuState\MenuState.h" />
+    <ClInclude Include="src\Application.h" />
+    <ClInclude Include="src\Enums\StateID.h" />
     <ClInclude Include="src\Inputs\CommandQueue\CommandQueue.h" />
     <ClInclude Include="src\Enums\Category.h" />
     <ClInclude Include="src\Inputs\Command\Command.h" />
@@ -152,10 +167,13 @@
     <ClInclude Include="src\Enums\ShaderID.h" />
     <ClInclude Include="src\Enums\SoundID.h" />
     <ClInclude Include="src\Enums\TextureID.h" />
-    <ClInclude Include="src\Game.h" />
+    <ClInclude Include="src\GameStates\GameState\GameState.h" />
     <ClInclude Include="src\Holders\Holders.h" />
     <ClInclude Include="src\Holders\ResourceHolder.h" />
     <ClInclude Include="src\Scene\World\World.h" />
+    <ClInclude Include="src\GameStates\State\State.h" />
+    <ClInclude Include="src\GameStates\StateStack\StateStack.h" />
+    <ClInclude Include="src\GameStates\TitleState\TitleState.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="data\Img\Sprite-0001.aseprite" />
@@ -167,6 +185,7 @@
     <Image Include="data\Textures\Desert.png" />
     <Image Include="data\Textures\Eagle.png" />
     <Image Include="data\Textures\Raptor.png" />
+    <Image Include="data\Textures\TitleScreen.png" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="data\Fonts\Sansation.ttf" />

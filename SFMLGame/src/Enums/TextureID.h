@@ -6,6 +6,7 @@ namespace Textures
 	{
 		Eagle,
 		Raptor,
-		Desert
+		Desert,
+		TitleScreen
 	};
 }

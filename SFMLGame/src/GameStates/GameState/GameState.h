@@ -1,8 +1,10 @@
 #pragma once
 
 
-#include "Scene/World/World.h"
-#include "Inputs/Player/Player.h"
+#include "../State/State.h"
+
+#include "../../Scene/World/World.h"
+#include "../../Inputs/Player/Player.h"
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Sprite.hpp>
@@ -15,54 +17,41 @@
 //		The class represents the game obj.
 // 
 ///////////////////////////////////////////////
-class Game
+class GameState : public State
 {
 private:
-	sf::RenderWindow window;
-	World			 world;
-	Player			 player;
-
-	// Define how much time one frame will occure.
-	const sf::Time TIME_PER_FRAME = sf::seconds(1.f / 60.f);
-
-	// Player's speed.
-	const float playerSpeed = 100.f;
-
-public:
-	Game();
+	World		world;
+	Player		player;
 
 public:
 	////////////////////////////////////////////////////////////////////
-	// \brief
-	//		This method starts a game, it is better to say
-	//		run a game loop.
+	// \brief 
+	//		Creates the instance of the Game scene for the app.
 	// 
 	////////////////////////////////////////////////////////////////////
-	void Run();
+	GameState(StateStack& stack, State::Context context);
 
-private:
+public: // Overriding methods.
 	////////////////////////////////////////////////////////////////////
 	// \brief
-	//			This method handels the user input.
+	//			Overriding drawing for the state of app.
 	// 
 	////////////////////////////////////////////////////////////////////
-	void ProcessEvent();
-
-	////////////////////////////////////////////////////////////////////
-	// \brief
-	//		This one updates the state for the player shape or 
-	//		another shapes that will be shown on the screen.
-	//		delta is the parameter that defines the time of each
-	//		frame in our computer.
-	// 
-	////////////////////////////////////////////////////////////////////
-	void Update(sf::Time delta);
+	virtual void Draw() override;
 
 	////////////////////////////////////////////////////////////////////
 	// \brief
-	//		This method displaes all objects in user screen. 
+	// 			Overriding updating for the state of app.
 	// 
 	////////////////////////////////////////////////////////////////////
-	void Render();
+	virtual bool Update(sf::Time deltaTime) override;
+
+
+	////////////////////////////////////////////////////////////////////
+	// \brief
+	// 			Overriding handeling for the state of app.
+	// 
+	////////////////////////////////////////////////////////////////////
+	virtual bool HandleEvent(const sf::Event& event) override;
 };
 

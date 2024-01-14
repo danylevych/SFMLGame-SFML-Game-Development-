@@ -4,6 +4,6 @@ namespace Font
 {
 	enum class FontID
 	{
-		// TODO: add the font
+		Main
 	};
 }

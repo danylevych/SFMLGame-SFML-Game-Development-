@@ -1,0 +1,53 @@
+#pragma once
+
+#include <SFML/System/Clock.hpp>
+#include <SFML/System/Lock.hpp>
+#include <SFML/System/Mutex.hpp>
+#include <SFML/System/Thread.hpp>
+
+/////////////////////////////////////////
+// \brief
+//	  Execute task in other thread.
+// 
+/////////////////////////////////////////
+class ParalelTask
+{
+private:
+	sf::Clock elipsedTime;
+	sf::Thread thread;
+	sf::Mutex mutex;
+	bool isFinished;
+
+public:
+	ParalelTask();
+
+private:
+	////////////////////////////////////////////
+	// \brief
+	//	 Lunched task in paralele execution.
+	// 
+	////////////////////////////////////////////
+	void RunTask();
+
+public:
+	////////////////////////////////////////////
+	// \brief
+	//	Start the execution of paralel task.
+	////////////////////////////////////////////
+	void Execute();
+
+	////////////////////////////////////////////
+	// \brief
+	//	Get the completion of the executing 
+	//  the task.
+	// 
+	////////////////////////////////////////////
+	float GetCompletion();
+
+	////////////////////////////////////////////
+	// \brief
+	//		Get the state of the execution.
+	////////////////////////////////////////////
+	bool IsFinished();
+};
+

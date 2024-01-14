@@ -1,11 +1,11 @@
-#include "src/Game.h"
+#include "src/Application.h"
 #include <iostream>
 
 int main()
 {
 	try
 	{
-		Game().Run(); // Start the game.
+		Application().Run(); // Start the game.
 	}
 	catch (const std::exception& e)
 	{
