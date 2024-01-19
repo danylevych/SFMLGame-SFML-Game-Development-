@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../State/State.h"
+#include "../../GUI/Container/Container.h"
 
 #include <vector>
 #include <SFML/Graphics/Text.hpp>
@@ -15,16 +16,8 @@
 class MenuState : public State
 {
 private:
-	enum class Options
-	{
-		Play,
-		Exit
-	};
-
-private:
-	int32_t currentChoose;
-	std::vector<sf::Text> options;
 	sf::Sprite background;
+	GUI::Container optionsContainer;
 
 public:
 	//////////////////////////////////////////////

@@ -5,3 +5,4 @@
 #include "PauseState/PauseState.h"
 #include "TitleState/TitleState.h"
 #include "LoadingState/LoadingState.h"
+#include "SettingsState/SettingsState.h"

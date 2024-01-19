@@ -4,6 +4,7 @@ namespace Font
 {
 	enum class FontID
 	{
-		Main
+		Main,
+		Label
 	};
 }

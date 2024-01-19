@@ -29,6 +29,7 @@ bool GameState::HandleEvent(const sf::Event& event)
 	// If the user want to pause the game.
 	if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
 	{
+		//RequestStackPop();
 		RequestStackPush(States::ID::Pause);
 	}
 

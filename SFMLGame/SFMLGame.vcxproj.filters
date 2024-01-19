@@ -66,6 +66,21 @@
     <ClCompile Include="src\GameStates\LoadingState\LoadingState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\GUI\Component\Component.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GUI\Container\Container.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GUI\Label\Label.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GUI\Button\Button.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameStates\SettingsState\SettingsState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\GameStates\GameState\GameState.h">
@@ -152,6 +167,24 @@
     <ClInclude Include="src\GameStates\States.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\GUI\Component\Component.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GUI\Container\Container.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GUI\Label\Label.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GUI\Button\Button.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameStates\SettingsState\SettingsState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Tools\Utility.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -174,6 +207,15 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="data\Textures\TitleScreen.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\Textures\ButtonNormal.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\Textures\ButtonPressed.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\Textures\ButtonSelected.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

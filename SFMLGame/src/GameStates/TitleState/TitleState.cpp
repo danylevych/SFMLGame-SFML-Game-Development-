@@ -43,7 +43,7 @@ bool TitleState::Update(sf::Time deltaTime)
 
 bool TitleState::HandleEvent(const sf::Event& event)
 {
-	if (event.type == sf::Event::KeyPressed)
+	if (event.type == sf::Event::KeyReleased)
 	{
 		RequestStackPop(); // Delete the current state.
 		RequestStackPush(States::ID::Menu); // Open a new state of the app.

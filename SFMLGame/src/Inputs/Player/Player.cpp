@@ -71,6 +71,18 @@ bool Player::IsRealtimeAction(Action action) const
 
 void Player::BindKey(const sf::Keyboard::Key& key, Action action)
 {
+	for (auto iter = bindedKeys.begin(); iter != bindedKeys.end();)
+	{
+		if (iter->second == action)
+		{
+			iter = bindedKeys.erase(iter);
+		}
+		else
+		{
+			++iter;
+		}
+	}
+
 	bindedKeys[key] = action;
 }
 
@@ -81,13 +93,13 @@ sf::Keyboard::Key Player::GetBindedKey(Action action) const
 			return item.second == action;
 	})->first;
 
-	for (const auto& keyValPair : bindedKeys)
+	/*for (const auto& keyValPair : bindedKeys)
 	{
 		if (keyValPair.second == action)
 		{
 			return keyValPair.first;
 		}
-	}
+	}*/
 }
 
 void Player::HandleEvent(const sf::Event& event, CommandQueue& commands)

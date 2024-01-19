@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../State/State.h"
+#include "../../GUI/Container/Container.h"
 
 #include <vector>
 #include <SFML/Graphics/Text.hpp>
@@ -14,16 +15,8 @@
 class PauseState : public State
 {
 private:
-	enum class Options
-	{
-		Resume,
-		ToMain
-	};
-
-private:
 	sf::Text title;
-	int32_t currentChoose; 
-	std::vector<sf::Text> options;
+	GUI::Container options;
 
 public:
 	//////////////////////////////////////////////
@@ -70,12 +63,4 @@ private: // Init section.
 	// 
 	////////////////////////////////////////////////////////////////////
 	void InitOptions();
-
-	////////////////////////////////////////////////////////////////////
-	// \brief
-	//		Set the origin of the text instance in the center
-	//		of itself.
-	// 
-	////////////////////////////////////////////////////////////////////
-	void CenterOrigin(sf::Text& text);
 };

@@ -7,6 +7,12 @@ namespace Textures
 		Eagle,
 		Raptor,
 		Desert,
-		TitleScreen
+		TitleScreen,
+
+		// Button textures identificators.
+		ButtonNormal,
+		ButtonSelected,
+		ButtonPressed
+		
 	};
 }

@@ -127,6 +127,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\GameStates\SettingsState\SettingsState.cpp" />
+    <ClCompile Include="src\GUI\Button\Button.cpp" />
+    <ClCompile Include="src\GUI\Label\Label.cpp" />
+    <ClCompile Include="src\GUI\Container\Container.cpp" />
+    <ClCompile Include="src\GUI\Component\Component.cpp" />
     <ClCompile Include="src\GameStates\LoadingState\LoadingState.cpp" />
     <ClCompile Include="src\Tools\ParalelTask\ParalelTask.cpp" />
     <ClCompile Include="src\GameStates\PauseState\PauseState.cpp" />
@@ -146,6 +151,11 @@
     <ClCompile Include="src\GameStates\TitleState\TitleState.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\GameStates\SettingsState\SettingsState.h" />
+    <ClInclude Include="src\GUI\Button\Button.h" />
+    <ClInclude Include="src\GUI\Label\Label.h" />
+    <ClInclude Include="src\GUI\Container\Container.h" />
+    <ClInclude Include="src\GUI\Component\Component.h" />
     <ClInclude Include="src\GameStates\LoadingState\LoadingState.h" />
     <ClInclude Include="src\GameStates\States.h" />
     <ClInclude Include="src\Tools\ParalelTask\ParalelTask.h" />
@@ -174,6 +184,7 @@
     <ClInclude Include="src\GameStates\State\State.h" />
     <ClInclude Include="src\GameStates\StateStack\StateStack.h" />
     <ClInclude Include="src\GameStates\TitleState\TitleState.h" />
+    <ClInclude Include="src\Tools\Utility.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="data\Img\Sprite-0001.aseprite" />
@@ -182,6 +193,9 @@
   <ItemGroup>
     <Image Include="data\Img\Eagle.gif" />
     <Image Include="data\Img\Eagle.png" />
+    <Image Include="data\Textures\ButtonNormal.png" />
+    <Image Include="data\Textures\ButtonPressed.png" />
+    <Image Include="data\Textures\ButtonSelected.png" />
     <Image Include="data\Textures\Desert.png" />
     <Image Include="data\Textures\Eagle.png" />
     <Image Include="data\Textures\Raptor.png" />

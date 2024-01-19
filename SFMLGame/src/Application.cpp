@@ -64,12 +64,16 @@ void Application::InitStates()
 	stateStack.RegistrState<LoadingState>(States::ID::Loading);
 	stateStack.RegistrState<GameState>(States::ID::Game);
 	stateStack.RegistrState<PauseState>(States::ID::Pause);
+	stateStack.RegistrState<SettingsState>(States::ID::Settings);
 }
 
 void Application::InitResources()
 {
 	textures.Load(Textures::TextureID::TitleScreen, "data/Textures/TitleScreen.png");
 	fonts.Load(Font::FontID::Main, "data/Fonts/Sansation.ttf");
+	textures.Load(Textures::TextureID::ButtonNormal, "data/Textures/ButtonNormal.png");
+	textures.Load(Textures::TextureID::ButtonPressed, "data/Textures/ButtonPressed.png");
+	textures.Load(Textures::TextureID::ButtonSelected, "data/Textures/ButtonSelected.png");
 }
 
 
@@ -78,7 +82,7 @@ void Application::ProcessInput()
 	sf::Event event;
 	while (window.pollEvent(event))
 	{
-		stateStack.HandleEvent(event); // Handeling events for current state.
+		stateStack.HandleEvent(event); // Handling events for current state.
 
 		if (event.type == sf::Event::Closed)
 		{
