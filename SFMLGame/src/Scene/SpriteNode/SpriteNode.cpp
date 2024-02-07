@@ -12,4 +12,3 @@ void SpriteNode::DrawCurrent(sf::RenderTarget & target, sf::RenderStates states)
 {
 	target.draw(sprite, states);
 }
-

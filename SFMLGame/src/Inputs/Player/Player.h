@@ -22,10 +22,20 @@ public:
 		MoveRight,
 		MoveUp,
 		MoveDown,
+		Fire,
+		LaunchMissile,
 		ActionCount
 	};
 
+	enum class  MissionStatus
+	{
+		MissionRunning,
+		MissionSuccess,
+		MissionFailure
+	};
+
 private:
+	MissionStatus status;
 	std::map<Action, Command> bindedCommands;
 	std::map<sf::Keyboard::Key, Action> bindedKeys;
 
@@ -62,6 +72,20 @@ public:
 	// 
 	/////////////////////////////////////////////
 	void HandleRealTimeInput(CommandQueue& commands);
+
+	/////////////////////////////////////////////
+	// \brief
+	//     Set the state for the mission.
+	// 
+	/////////////////////////////////////////////
+	void SetMissionStatus(MissionStatus status);
+
+	/////////////////////////////////////////////
+	// \brief
+	//    Return the state for the mission.
+	// 
+	/////////////////////////////////////////////
+	MissionStatus GetMissionStatus() const;
 
 private:
 	/////////////////////////////////////////////

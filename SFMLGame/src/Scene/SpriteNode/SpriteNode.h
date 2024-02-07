@@ -46,4 +46,3 @@ public:
 	////////////////////////////////////////////////
 	virtual void DrawCurrent(sf::RenderTarget& target, sf::RenderStates states) const override;
 };
-

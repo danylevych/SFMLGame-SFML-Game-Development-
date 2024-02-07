@@ -1,8 +1,12 @@
 #pragma once
-#include <string>
-#include <SFML/Window/Keyboard.hpp>
 
-std::string toString(sf::Keyboard::Key key)
+#include <string>
+#include <random>
+#include <SFML/Window/Keyboard.hpp>
+#include <SFML/Graphics/Text.hpp>
+
+
+inline std::string toString(sf::Keyboard::Key key)
 {
 #define BOOK_KEYTOSTRING_CASE(KEY) case sf::Keyboard::KEY: return #KEY;
 
@@ -113,4 +117,39 @@ std::string toString(sf::Keyboard::Key key)
 	}
 
 	return "";
+}
+
+inline void CenteredUnit(sf::Text& text)
+{
+	auto textBounds = text.getLocalBounds();
+	text.setOrigin(textBounds.width / 2.f, textBounds.height / 2.f);
+}
+
+inline float ToDegree(float radian)
+{
+	return 180.f / 3.141592653589793238462643383f * radian;
+}
+
+inline float ToRadian(float degree)
+{
+	return 3.141592653589793238462643383f / 180.f * degree;
+}
+
+inline float VectorLenght(sf::Vector2f vector)
+{
+	return vector.x * vector.x + vector.y * vector.y;
+}
+
+inline sf::Vector2f UnitVector(sf::Vector2f vector)
+{
+	return vector / VectorLenght(vector);
+}
+
+
+inline int RandInt(int maxValue)
+{
+	auto seed = static_cast<unsigned long>(std::time(nullptr));
+	std::default_random_engine engine(seed);
+	std::uniform_int_distribution<> distr(0, maxValue - 1);
+	return distr(engine);
 }

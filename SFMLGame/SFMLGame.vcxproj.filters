@@ -81,6 +81,21 @@
     <ClCompile Include="src\GameStates\SettingsState\SettingsState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Utilities\DataTables\DataTables.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scene\TextNode\TextNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Entities\Projectile\Projectile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Entities\Pickup\Pickup.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameStates\GameOverState\GameOverState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\GameStates\GameState\GameState.h">
@@ -185,6 +200,21 @@
     <ClInclude Include="src\Tools\Utility.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Utilities\DataTables\DataTables.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scene\TextNode\TextNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Entities\Projectile\Projectile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Entities\Pickup\Pickup.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameStates\GameOverState\GameOverState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -216,6 +246,27 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="data\Textures\ButtonSelected.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\Textures\Avenger.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\Textures\Bullet.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\Textures\Missile.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\Textures\FireRate.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\Textures\FireSpread.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\Textures\HealthRefill.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\Textures\MissileRefill.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

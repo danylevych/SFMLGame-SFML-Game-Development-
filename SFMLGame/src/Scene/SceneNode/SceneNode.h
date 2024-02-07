@@ -1,8 +1,5 @@
 #pragma once
 
-
-#include "../../Inputs/Command/Command.h"
-
 #include <memory>
 #include <vector>
 #include <SFML/System/NonCopyable.hpp>
@@ -11,8 +8,10 @@
 #include <SFML/Graphics/RenderStates.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/System/Time.hpp>
+#include <set>
 
 struct Command;
+class CommandQueue;
 
 ///////////////////////////////////////////////////
 // \brief
@@ -26,6 +25,7 @@ class SceneNode : public sf::Transformable
 {
 public:
 	using Ptr = std::unique_ptr<SceneNode>;
+	using Pair = std::pair<SceneNode*, SceneNode*>;
 
 private:
 	SceneNode* parent;
@@ -70,12 +70,49 @@ public:
 	/////////////////////////////////////////////////////
 	virtual void DrawCurrent(sf::RenderTarget& target, sf::RenderStates states) const;
 
+public:
+	/////////////////////////////////////////////////////
+	// \brief
+	//		 Return the bounds for the node.
+	// 
+	/////////////////////////////////////////////////////
+	virtual sf::FloatRect GetBoundingRect() const;
+
+	/////////////////////////////////////////////////////
+	// \brief
+	//	   Check if the node is marked for removal.
+	// 
+	/////////////////////////////////////////////////////
+	virtual bool IsMarkedForRemoval() const;
+
+	/////////////////////////////////////////////////////
+	// \brief
+	//		   Check if the node is dstoyed.
+	// 
+	/////////////////////////////////////////////////////
+	virtual bool IsDestroyed() const;
+
+	/////////////////////////////////////////////////////
+	// \brief
+	//      Check collision between SceneNodes.
+	// 
+	/////////////////////////////////////////////////////
+	void CheckNodeCollision(SceneNode& node, std::set<Pair>& collisioPairs);
+
+	/////////////////////////////////////////////////////
+	// \brief
+	//		Check collision for the graph.
+	// 
+	/////////////////////////////////////////////////////
+	void CheckSceneCollision(SceneNode& sceneGraph, std::set<Pair>& collisionPairs);
+
+public:
 	/////////////////////////////////////////////////////
 	// \brief
 	//		Update the scine node in the window.
 	// 
 	/////////////////////////////////////////////////////
-	void Update(sf::Time delta);
+	void Update(sf::Time delta, CommandQueue& commands);
 
 	/////////////////////////////////////////////////////
 	// \brief
@@ -108,19 +145,29 @@ public:
 	/////////////////////////////////////////////////////
 	void OnCommand(const Command& command, sf::Time deltaTime);
 
+	/////////////////////////////////////////////////////
+	// \brief
+	//   Remove objects were marcered for destroying.
+	// 
+	/////////////////////////////////////////////////////
+	void RemoveWrecks();
+
 private:
 	/////////////////////////////////////////////////////
 	// \brief
-	//		Updtate the children for current node.
+	//		Update the children for current node.
 	// 
 	/////////////////////////////////////////////////////
-	void UpdateChildren(sf::Time delta);
+	void UpdateChildren(sf::Time delta, CommandQueue& commands);
 
 	/////////////////////////////////////////////////////
 	// \brief
 	//				Update the curent node.
 	// 
 	/////////////////////////////////////////////////////
-	virtual void UpdateCurrent(sf::Time delta);
+	virtual void UpdateCurrent(sf::Time delta, CommandQueue& commands);
 };
 
+float Distance(const SceneNode& lhs, const SceneNode& rhs);
+
+bool Collision(const SceneNode& left, const SceneNode& right);

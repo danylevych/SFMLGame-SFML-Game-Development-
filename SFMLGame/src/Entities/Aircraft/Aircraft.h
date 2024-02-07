@@ -2,8 +2,11 @@
 
 #include "../Entity/Entity.h"
 #include "../../Holders/Holders.h"
+#include "../Projectile/Projectile.h"
+#include "../../Scene/TextNode/TextNode.h"
 
 #include <SFML/Graphics/Sprite.hpp>
+#include "../../Inputs/CommandQueue/CommandQueue.h"
 
 
 /////////////////////////////////////////////////
@@ -15,20 +18,46 @@ class Aircraft : public Entity
 {
 public:
 	// This is the type for the aircraft.
-	enum class Type
+	enum Type
 	{
 		Ealge,
-		Raptor
+		Raptor,
+		Avenger,
+		TypeCount
 	};
 
 private:
+	//============ Aircraft =============
 	Type type;
 	sf::Sprite sprite;
+	TextNode* hitpointsText;
+	TextNode* missileDisplay;
+	float traveledDistance;
+	size_t directionIndex;
+
+	//============   Shoot  =============
+	Command fireCommand;
+	Command missileCommand;
+	sf::Time fireCountDown;
+	bool isFiring;
+	bool isLaunchingMissile;
+	bool isMarkedForRemoval;
+	
+	int missileAmmo;
+	int fireRateLevel;
+	int spreadLevel;
+
+	//============ Pickup ===============
+	Command dropPickupCommand;
 
 public:
-	Aircraft(Type type, TextureHolder& textures);
+	Aircraft(Type type, const TextureHolder& textures, const FontHolder& fonts);
 
 	virtual ~Aircraft() = default;
+
+private: // Init section.
+	void InitCommands(const TextureHolder& textures);
+	void InitTexts(const FontHolder& fonts);
 
 public:
 	////////////////////////////////////////////////////
@@ -45,11 +74,134 @@ public:
 	// 
 	////////////////////////////////////////////////////
 	virtual uint32_t GetCategory() const override;
+	
+	////////////////////////////////////////////////////
+	// \brief
+	//       Override the update for the entity.
+	// 
+	////////////////////////////////////////////////////
+	virtual void UpdateCurrent(sf::Time deltaTime, CommandQueue& commands) override;
 
+	////////////////////////////////////////////////////
+	// \brief
+	//	   Retyrns the bounds for the aircraft.
+	// 
+	////////////////////////////////////////////////////
+	virtual sf::FloatRect GetBoundingRect() const override;
+
+public:
+	////////////////////////////////////////////////////
+	// \brief
+	//     Return the max speed for the aircraft.
+	// 
+	////////////////////////////////////////////////////
+	float_t GetMaxSpeed() const;
+
+	////////////////////////////////////////////////////
+	// \brief
+	//				Shoot the bullet.
+	// 
+	////////////////////////////////////////////////////
+	void Fire();
+
+	////////////////////////////////////////////////////
+	// \brief
+	//				 Launch the missle.
+	// 
+	////////////////////////////////////////////////////
+	void LaunchMissile();
+
+	////////////////////////////////////////////////////
+	// \brief
+	//		Return true if the aircraft is allied.
+	// 
+	////////////////////////////////////////////////////
+	bool IsAllied() const;
+
+	////////////////////////////////////////////////////
+	// \brief
+	//		     Increase the level of Fire.
+	// 
+	////////////////////////////////////////////////////
+	void IncreaseFireRate();
+
+	////////////////////////////////////////////////////
+	// \brief
+	//			 Increase the spread level.
+	// 
+	////////////////////////////////////////////////////
+	void IncreaSpread();
+
+	////////////////////////////////////////////////////
+	// \brief
+	//	 Add some coutn of missiles to the existing.
+	// 
+	////////////////////////////////////////////////////
+	void CollectMissile(uint32_t count);
+
+	////////////////////////////////////////////////////
+	// \brief
+	//  Return if the aircraft is marked for removal.
+	// 
+	////////////////////////////////////////////////////
+	bool IsMarkedForRemoval() const;
+
+private:
+	////////////////////////////////////////////////////
+	// \brief
+	//		Update the labels on the text nodes.
+	// 
+	////////////////////////////////////////////////////
+	void UpdateText();
+
+	////////////////////////////////////////////////////
+	// \brief
+	//   Update the movement state for the aircraft.
+	// 
+	////////////////////////////////////////////////////
+	void UpdateMovementPattern(sf::Time deltaTime);
+
+	////////////////////////////////////////////////////
+	// \brief
+	//        Check if we are able to shoot.
+	// 
+	////////////////////////////////////////////////////
+	void CheckProjectileLaunch(sf::Time deltaTime, CommandQueue& commands);
+
+	////////////////////////////////////////////////////
+	// \brief
+	//				Create the bullets.
+	// 
+	////////////////////////////////////////////////////
+	void CreateBullets(SceneNode& node, const TextureHolder& textures) const;
+
+	////////////////////////////////////////////////////
+	// \brief
+	//			   Create the projectile.
+	// 
+	////////////////////////////////////////////////////
+	void CreateProjectile(SceneNode& node, Projectile::Type type, float xOffset, float yOffset, const TextureHolder& textures) const;
+
+	////////////////////////////////////////////////////
+	// \brief
+	//		   Check if pick up is droped.
+	// 
+	////////////////////////////////////////////////////
+	void CheckPicupDrop(CommandQueue& commands);
+
+	////////////////////////////////////////////////////
+	// \brief
+	//				Create the pickup.
+	// 
+	////////////////////////////////////////////////////
+	void CreatePickup(SceneNode& node, const TextureHolder& textures);
+
+public:
 	////////////////////////////////////////////////////
 	// \brief
 	//		Converts the Aircraft::Type to 
 	//		Textures::TextureID.
+	// 
 	////////////////////////////////////////////////////
 	static Textures::TextureID ToTextureID(Type type);
 };

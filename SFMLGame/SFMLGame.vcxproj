@@ -127,6 +127,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\GameStates\GameOverState\GameOverState.cpp" />
+    <ClCompile Include="src\Entities\Pickup\Pickup.cpp" />
+    <ClCompile Include="src\Entities\Projectile\Projectile.cpp" />
     <ClCompile Include="src\GameStates\SettingsState\SettingsState.cpp" />
     <ClCompile Include="src\GUI\Button\Button.cpp" />
     <ClCompile Include="src\GUI\Label\Label.cpp" />
@@ -149,8 +152,13 @@
     <ClCompile Include="src\GameStates\State\State.cpp" />
     <ClCompile Include="src\GameStates\StateStack\StateStack.cpp" />
     <ClCompile Include="src\GameStates\TitleState\TitleState.cpp" />
+    <ClCompile Include="src\Utilities\DataTables\DataTables.cpp" />
+    <ClCompile Include="src\Scene\TextNode\TextNode.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\GameStates\GameOverState\GameOverState.h" />
+    <ClInclude Include="src\Entities\Pickup\Pickup.h" />
+    <ClInclude Include="src\Entities\Projectile\Projectile.h" />
     <ClInclude Include="src\GameStates\SettingsState\SettingsState.h" />
     <ClInclude Include="src\GUI\Button\Button.h" />
     <ClInclude Include="src\GUI\Label\Label.h" />
@@ -185,6 +193,8 @@
     <ClInclude Include="src\GameStates\StateStack\StateStack.h" />
     <ClInclude Include="src\GameStates\TitleState\TitleState.h" />
     <ClInclude Include="src\Tools\Utility.h" />
+    <ClInclude Include="src\Utilities\DataTables\DataTables.h" />
+    <ClInclude Include="src\Scene\TextNode\TextNode.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="data\Img\Sprite-0001.aseprite" />
@@ -193,11 +203,18 @@
   <ItemGroup>
     <Image Include="data\Img\Eagle.gif" />
     <Image Include="data\Img\Eagle.png" />
+    <Image Include="data\Textures\Avenger.png" />
+    <Image Include="data\Textures\Bullet.png" />
     <Image Include="data\Textures\ButtonNormal.png" />
     <Image Include="data\Textures\ButtonPressed.png" />
     <Image Include="data\Textures\ButtonSelected.png" />
     <Image Include="data\Textures\Desert.png" />
     <Image Include="data\Textures\Eagle.png" />
+    <Image Include="data\Textures\FireRate.png" />
+    <Image Include="data\Textures\FireSpread.png" />
+    <Image Include="data\Textures\HealthRefill.png" />
+    <Image Include="data\Textures\Missile.png" />
+    <Image Include="data\Textures\MissileRefill.png" />
     <Image Include="data\Textures\Raptor.png" />
     <Image Include="data\Textures\TitleScreen.png" />
   </ItemGroup>

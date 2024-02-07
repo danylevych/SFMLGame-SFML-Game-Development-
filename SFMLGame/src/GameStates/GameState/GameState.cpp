@@ -5,9 +5,11 @@
 
 GameState::GameState(StateStack& stack, State::Context context)
 	: State(stack, context)
-	, world(*context.window)
+	, world(*context.window, *context.fonts)
 	, player(*context.player)
-{	}
+{	
+	player.SetMissionStatus(Player::MissionStatus::MissionRunning);
+}
 
 void GameState::Draw()
 {
@@ -17,6 +19,18 @@ void GameState::Draw()
 bool GameState::Update(sf::Time deltaTime)
 {
 	world.Update(deltaTime);
+
+	if (!world.HasAlivePlayer())
+	{
+		player.SetMissionStatus(Player::MissionStatus::MissionFailure);
+		RequestStackPush(States::ID::GameOver);
+	}
+	else if (world.HasPlayerReachedEnd())
+	{
+		player.SetMissionStatus(Player::MissionStatus::MissionSuccess);
+		RequestStackPush(States::ID::GameOver);
+	}
+
 	player.HandleRealTimeInput(world.GetCommandQueue());
 	
 	return true;

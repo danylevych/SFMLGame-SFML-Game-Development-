@@ -1,8 +1,12 @@
 #include "Player.h"
 
-#include <iostream>
+#include <map>
+#include <string>
+#include <algorithm>
 
 #include "../../Entities/Aircraft/Aircraft.h"
+
+using namespace std::placeholders;
 
 
 ///////////////////////////////////////////////////
@@ -23,33 +27,41 @@ public:
 
 	void operator()(Aircraft& aircraft, sf::Time delataTime) const
 	{
-		aircraft.Accelerate(velocity);
+		aircraft.Accelerate(velocity * aircraft.GetMaxSpeed());
 	}
 };
 
+
 Player::Player()
+	: status(MissionStatus::MissionRunning)
 {
+	// Initialize the key and commands.
 	InitBindedKeys();
 	InitBindedCommands();
 }
 
 void Player::InitBindedKeys()
 {
-	bindedKeys[sf::Keyboard::Up] = Action::MoveUp;
-	bindedKeys[sf::Keyboard::Down] = Action::MoveDown;
-	bindedKeys[sf::Keyboard::Left] = Action::MoveLeft;
+	// Set the keys.
+	bindedKeys[sf::Keyboard::Up]    = Action::MoveUp;
+	bindedKeys[sf::Keyboard::Down]  = Action::MoveDown;
+	bindedKeys[sf::Keyboard::Left]  = Action::MoveLeft;
 	bindedKeys[sf::Keyboard::Right] = Action::MoveRight;
+	bindedKeys[sf::Keyboard::Space] = Action::Fire;
+	bindedKeys[sf::Keyboard::M]     = Action::LaunchMissile;
 }
 
 void Player::InitBindedCommands()
 {
-	const float PLAYER_SPEED = 40.f;
+	// Set the commands for each action.
+	bindedCommands[Action::MoveLeft].action      = DerivedAction<Aircraft>(AircraftMover(-1,  0.f));
+	bindedCommands[Action::MoveRight].action     = DerivedAction<Aircraft>(AircraftMover(+1,  0.f));
+	bindedCommands[Action::MoveUp].action        = DerivedAction<Aircraft>(AircraftMover(0.f, -1));
+	bindedCommands[Action::MoveDown].action      = DerivedAction<Aircraft>(AircraftMover(0.f, +1));
+	bindedCommands[Action::Fire].action          = DerivedAction<Aircraft>(std::bind(&Aircraft::Fire, _1));
+	bindedCommands[Action::LaunchMissile].action = DerivedAction<Aircraft>(std::bind(&Aircraft::LaunchMissile, _1));
 
-	bindedCommands[Action::MoveLeft].action  = DerivedAction<Aircraft>(AircraftMover(-PLAYER_SPEED, 0.f));
-	bindedCommands[Action::MoveRight].action = DerivedAction<Aircraft>(AircraftMover(+PLAYER_SPEED, 0.f));
-	bindedCommands[Action::MoveUp].action    = DerivedAction<Aircraft>(AircraftMover(0.f, -PLAYER_SPEED));
-	bindedCommands[Action::MoveDown].action  = DerivedAction<Aircraft>(AircraftMover(0.f, +PLAYER_SPEED));
-	
+	// Set the category for each command.
 	for (auto& item : bindedCommands)
 	{
 		item.second.category = Category::PlayerAircraft;
@@ -64,8 +76,10 @@ bool Player::IsRealtimeAction(Action action) const
 	case Player::Action::MoveRight:
 	case Player::Action::MoveUp:
 	case Player::Action::MoveDown:
+	case Player::Action::Fire:
 		return true;
 	}
+
 	return false;
 }
 
@@ -92,14 +106,6 @@ sf::Keyboard::Key Player::GetBindedKey(Action action) const
 		[action](const std::pair<sf::Keyboard::Key, Action>& item) -> bool {
 			return item.second == action;
 	})->first;
-
-	/*for (const auto& keyValPair : bindedKeys)
-	{
-		if (keyValPair.second == action)
-		{
-			return keyValPair.first;
-		}
-	}*/
 }
 
 void Player::HandleEvent(const sf::Event& event, CommandQueue& commands)
@@ -123,4 +129,14 @@ void Player::HandleRealTimeInput(CommandQueue& commands)
 			commands.Push(bindedCommands[item.second]);
 		}
 	}
+}
+
+void Player::SetMissionStatus(MissionStatus status)
+{
+	this->status = status;	
+}
+
+Player::MissionStatus Player::GetMissionStatus() const
+{
+	return status;
 }

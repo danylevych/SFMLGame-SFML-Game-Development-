@@ -13,10 +13,11 @@
 class Entity : public SceneNode
 {
 private:
+	int32_t hitpoints;
 	sf::Vector2f velocity;
 
 public:
-	Entity() = default;
+	Entity(int32_t hitpoints);
 
 	// We need to set the virtual word before
 	// destructor definition because we use 
@@ -48,12 +49,48 @@ public:
 	void Accelerate(sf::Vector2f velocity);
 	void Accelerate(float xVelocity, float yVelocity);
 
-private:
+	///////////////////////////////////////////////////////
+	// \brief
+	//   Returns the hitpoints value for current entity.
+	// 
+	///////////////////////////////////////////////////////
+	int32_t GetHitpoints() const;
+
+	///////////////////////////////////////////////////////
+	// \brief
+	//   Repairs the hitpoints value on specified value.
+	// 
+	///////////////////////////////////////////////////////
+	void Repair(int32_t points);
+
+	///////////////////////////////////////////////////////
+	// \brief
+	// Substract specified number for entity's hitpoints.
+	// 
+	///////////////////////////////////////////////////////
+	void Damage(int32_t points);
+
+	///////////////////////////////////////////////////////
+	// \brief
+	// Returns true if the hitpoints of the entity reached
+	// or less then zero points.
+	// 
+	///////////////////////////////////////////////////////
+	bool IsDestroyed() const;
+	
+	///////////////////////////////////////////////////////
+	// \brief
+	//   Destroy entity by set the health point as 0.
+	// 
+	///////////////////////////////////////////////////////
+	void Destroy();
+
+protected:
 	///////////////////////////////////////////////////////
 	// \brief
 	//		Overloading the updating for the instance.
 	// 
 	///////////////////////////////////////////////////////
-	virtual void UpdateCurrent(sf::Time delta) override;
+	virtual void UpdateCurrent(sf::Time delta, CommandQueue& commands) override;
 };
 

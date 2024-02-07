@@ -27,11 +27,29 @@ public:
 		LayerCount
 	};
 
+	//////////////////////////////////////////////////////////
+	// \brief
+	//		  Spawn point for the entity aricrafts.
+	// 
+	//////////////////////////////////////////////////////////
+	struct SpawnPoint
+	{
+		SpawnPoint(Aircraft::Type type, float x, float y)
+			: type(type)
+			, x(x), y(y)
+		{	}
+
+		Aircraft::Type type;
+		float x;
+		float y;
+	};
+
 private:
 	// ========== World props ===========
 	sf::RenderWindow& window;
 	sf::View		  view;
 	TextureHolder	  textures;
+	FontHolder&		  fonts;
 	SceneNode		  sceneGraph;
 	sf::FloatRect	  worldBounds;
 
@@ -45,6 +63,10 @@ private:
 	float_t			  scrollSpeed;
 	Aircraft*		  playerAircraft;
 
+	// =========== Enemies ===========
+	std::vector<SpawnPoint> enemySpawnPoints;
+	std::vector<Aircraft*> activeEnemies;
+
 public:
 	/////////////////////////////////////////////////
 	// \brief
@@ -52,7 +74,7 @@ public:
 	//		of the game.
 	// 
 	/////////////////////////////////////////////////
-	World(sf::RenderWindow& window);
+	World(sf::RenderWindow& window, FontHolder& fonts);
 
 public:
 	/////////////////////////////////////////////////
@@ -75,6 +97,21 @@ public:
 	// 
 	/////////////////////////////////////////////////
 	CommandQueue& GetCommandQueue();
+	
+    /////////////////////////////////////////////////
+	// \brief
+	//   Return true if player is still alive.
+	// 
+	/////////////////////////////////////////////////
+	bool HasAlivePlayer() const;
+
+	/////////////////////////////////////////////////
+	// \brief
+	//   Return true if player reach the end of 
+	//   mission.
+	// 
+	/////////////////////////////////////////////////
+	bool HasPlayerReachedEnd() const;
 
 private:
 	/////////////////////////////////////////////////
@@ -105,5 +142,44 @@ private:
 	// 
 	/////////////////////////////////////////////////
 	void AdaptPlayerPosition();
+
+	/////////////////////////////////////////////////
+	// \brief
+	//	  Guide the Missile to the most neerest 
+	//    enemy.
+	// 
+	/////////////////////////////////////////////////
+	void GuideMissiles();
+
+private:
+	/////////////////////////////////////////////////
+	// \brief
+	//    Handle the collision between entities
+	//    in the game screen.
+	// 
+	/////////////////////////////////////////////////
+	void HandleCollision();
+
+private:
+	/////////////////////////////////////////////////
+	// \brief
+	//    This is a section for helper functions.
+	// 
+	/////////////////////////////////////////////////
+
+	void AddEnemies();
+	void AddEnemy(Aircraft::Type type, float x, float y);
+	void SpawnEnemies();
+	void DestroyEntitiesOutsideView();
+
+	sf::FloatRect GetViewBounds() const;
+	sf::FloatRect GetBattlefieldBounds() const;
 };
 
+
+//////////////////////////////////////////////////////
+// \brief
+//	   Check categories of the collision pair.
+// 
+//////////////////////////////////////////////////////
+bool MatchesCategories(SceneNode::Pair& colliders, Category::Type type1, Category::Type type2);
